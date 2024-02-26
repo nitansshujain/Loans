@@ -1,10 +1,23 @@
 package com.microservice.loans.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 import java.util.Map;
 
+//@ConfigurationProperties(prefix = "loans")
+// Using record will not allow setters, hence refreshing the values at runtime will not be possible
+//public record LoansContactInfoDto(String message, Map<String, String> contactDetails, List<String> onCallSupport) {
+//}
+
 @ConfigurationProperties(prefix = "loans")
-public record LoansContactInfoDto(String message, Map<String, String> contactDetails, List<String> onCallSupport) {
+@Getter
+@Setter
+public class LoansContactInfoDto{
+    String message;
+    Map<String, String> contactDetails;
+    List<String> onCallSupport;
 }
+
