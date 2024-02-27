@@ -20,6 +20,7 @@ spring:
     show-sql: true
   config:
     import: "optional:configserver:http://localhost:8071/"  # We must use configserver here regardless of the name provided to application (configserver); optional is used when we want application to be started if case of issue as well.
+
   # Adding rabbitmq configuration, refreshing the bus only will refresh all the connected MSs
   rabbitmq:
     host: "localhost"
