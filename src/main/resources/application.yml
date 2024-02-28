@@ -6,27 +6,23 @@ spring:
   profiles:
     active: "prod"
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3307/loansdb
+    username: root
+    password: root
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+    show-sql: true  # To show the executed SQL inside the console
+  sql:
+    init:
+      mode: always # Always run the schema sql commands
   config:
     import: "optional:configserver:http://localhost:8071/"  # We must use configserver here regardless of the name provided to application (configserver); optional is used when we want application to be started if case of issue as well.
 
   # Adding rabbitmq configuration, refreshing the bus only will refresh all the connected MSs
-  rabbitmq:
-    host: "localhost"
-    port: 5672
-    username: "guest"
-    password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 # Refresh the MS when any changes occur (actuator/refresh). Here I'm including all the endpoints
 management:
@@ -34,7 +30,3 @@ management:
     web:
       exposure:
         include: "*"
-
-###### To run in the browser at port 8090
-#http://localhost:8090/h2-console
-#http://localhost:8090/swagger-ui/index.html
